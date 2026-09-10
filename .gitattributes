@@ -1,0 +1,14 @@
+* text=auto
+*.pdf binary
+*.tif binary
+*.tiff binary
+*.jpg binary
+*.png binary
+*.bmp binary
+*.gif binary
+*.pcx binary
+*.tga binary
+*.wmf binary
+*.ps1 text eol=crlf
+*.vcxproj text eol=crlf
+*.slnx text eol=crlf

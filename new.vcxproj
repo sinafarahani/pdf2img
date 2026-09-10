@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+    pdf2img — Visual Studio project (x64 only).
+    Dependencies:
+      * vcpkg manifest (vcpkg.json) in this directory, triplet x64-windows-static. The vcpkg MSBuild
+        integration below installs/links them automatically (set VCPKG_ROOT or edit VcpkgRoot).
+      * PDFium prebuilt binaries in third_party\pdfium (run scripts\get_pdfium.ps1 once; the pre-build step does it).
+    Keep the source list in sync with CMakeLists.txt.
+  -->
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{9fdc429a-24cb-434a-8949-2d4b6bedf8ea}</ProjectGuid>
+    <RootNamespace>pdf2img</RootNamespace>
+    <ProjectName>pdf2img</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <!-- vcpkg manifest-mode integration -->
+    <VcpkgRoot Condition="'$(VcpkgRoot)'=='' and '$(VCPKG_ROOT)'!=''">$(VCPKG_ROOT)\</VcpkgRoot>
+    <VcpkgRoot Condition="'$(VcpkgRoot)'==''">H:\vcpkg\</VcpkgRoot>
+    <VcpkgEnabled>true</VcpkgEnabled>
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+    <VcpkgManifestInstall>true</VcpkgManifestInstall>
+    <VcpkgTriplet>x64-windows-static</VcpkgTriplet>
+    <VcpkgInstalledDir>$(MSBuildProjectDirectory)\vcpkg_installed\</VcpkgInstalledDir>
+    <VcpkgUseStatic>true</VcpkgUseStatic>
+    <VcpkgAutoLink>true</VcpkgAutoLink>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <Import Project="$(VcpkgRoot)scripts\buildsystems\msbuild\vcpkg.props" Condition="exists('$(VcpkgRoot)scripts\buildsystems\msbuild\vcpkg.props')" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <TargetName>pdf2img</TargetName>
+    <OutDir>$(SolutionDir)x64\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)x64\$(Configuration)\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)third_party\pdfium\include;$(ProjectDir)third_party\pdfium\include\cpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)third_party\pdfium\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pdfium.dll.lib;delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>pdfium.dll</DelayLoadDLLs>
+    </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+      <AdditionalManifestFiles>src\app.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <PreBuildEvent>
+      <Command>if not exist "$(ProjectDir)third_party\pdfium\bin\pdfium.dll" powershell -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)scripts\get_pdfium.ps1"</Command>
+      <Message>Ensuring PDFium binaries are present</Message>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy /D /Y /Q "$(ProjectDir)third_party\pdfium\bin\pdfium.dll" "$(OutDir)" &gt;nul</Command>
+      <Message>Copying pdfium.dll next to the executable</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <Optimization>MaxSpeed</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\cli.cpp" />
+    <ClCompile Include="src\common.cpp" />
+    <ClCompile Include="src\config.cpp" />
+    <ClCompile Include="src\fsutil.cpp" />
+    <ClCompile Include="src\ipc.cpp" />
+    <ClCompile Include="src\log.cpp" />
+    <ClCompile Include="src\naming.cpp" />
+    <ClCompile Include="src\pipeline.cpp" />
+    <ClCompile Include="src\child_process.cpp" />
+    <ClCompile Include="src\supervisor.cpp" />
+    <ClCompile Include="src\worker.cpp" />
+    <ClCompile Include="src\image\convert.cpp" />
+    <ClCompile Include="src\encode\tiff_writer.cpp" />
+    <ClCompile Include="src\encode\jpeg_writer.cpp" />
+    <ClCompile Include="src\encode\png_writer.cpp" />
+    <ClCompile Include="src\encode\gif_writer.cpp" />
+    <ClCompile Include="src\encode\simple_writers.cpp" />
+    <ClCompile Include="src\render\pdf_document.cpp" />
+    <ClCompile Include="src\render\repair_qpdf.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\cli.h" />
+    <ClInclude Include="src\common.h" />
+    <ClInclude Include="src\config.h" />
+    <ClInclude Include="src\fsutil.h" />
+    <ClInclude Include="src\ipc.h" />
+    <ClInclude Include="src\log.h" />
+    <ClInclude Include="src\naming.h" />
+    <ClInclude Include="src\pipeline.h" />
+    <ClInclude Include="src\child_process.h" />
+    <ClInclude Include="src\supervisor.h" />
+    <ClInclude Include="src\worker.h" />
+    <ClInclude Include="src\version.h" />
+    <ClInclude Include="src\image\image.h" />
+    <ClInclude Include="src\image\convert.h" />
+    <ClInclude Include="src\image\palettes.h" />
+    <ClInclude Include="src\encode\encoders.h" />
+    <ClInclude Include="src\render\pdf_document.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\app.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vcpkg.json" />
+    <None Include="CMakeLists.txt" />
+    <None Include="README.md" />
+    <None Include="docs\DESIGN.md" />
+    <None Include="docs\OLD_TOOL_BEHAVIOR.md" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <Import Project="$(VcpkgRoot)scripts\buildsystems\msbuild\vcpkg.targets" Condition="exists('$(VcpkgRoot)scripts\buildsystems\msbuild\vcpkg.targets')" />
+</Project>

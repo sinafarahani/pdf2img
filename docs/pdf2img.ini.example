@@ -1,0 +1,44 @@
+; pdf2img settings. To use them, save this file as pdf2img.ini next to the pdf2img executable.
+; Every key is optional. An environment variable (named on the line above each key) overrides the file.
+; Keep comments on their own lines: text after a value is treated as part of the value.
+
+[Options]
+; Page-number suffix of the output files, a printf format with exactly one %d.        PDF2IMG_SUFFIX
+AddFileNameSuffix=%04d
+
+; Accepted for compatibility with the old tool; ignored.
+IsPreProcessPDFFile=0
+
+; Resolution used when -r is not given.                                              PDF2IMG_DEFAULT_DPI
+DefaultDPI=101
+
+; JPEG quality used when -q is not given.                                            PDF2IMG_JPEG_QUALITY
+JpegQuality=90
+
+; Time limit per page in seconds; the page's worker is stopped after this plus a grace period.
+;                                                                                    PDF2IMG_PAGE_TIMEOUT
+PageTimeoutSec=120
+
+; Time limit for the whole run in seconds (0 = none).                                PDF2IMG_TOTAL_TIMEOUT
+TotalTimeoutSec=1800
+
+; Parallel render processes (0 = number of CPU cores, at most 8).                    PDF2IMG_WORKERS
+Workers=0
+
+; Memory limit per render process in MB (minimum 256).                               PDF2IMG_WORKER_MEMORY_MB
+WorkerMemoryLimitMB=2048
+
+; Pages whose bitmap would be larger than this (MB) are rendered at DefaultDPI.      PDF2IMG_MAX_BITMAP_MB
+MaxBitmapMB=1536
+
+; Horizontal predictor for LZW-compressed TIFF (smaller files). 1 = on, 0 = off.     PDF2IMG_LZW_PREDICTOR
+LzwPredictor=1
+
+; Anti-aliasing of text and graphics. 1 = on, 0 = off.                               PDF2IMG_ANTIALIAS
+Antialias=1
+
+; 1 = also report every page and step (stderr and log file).                         PDF2IMG_VERBOSE
+Verbose=0
+
+; Append errors and warnings to this file (empty = no log file).                     PDF2IMG_LOG
+LogFile=

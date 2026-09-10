@@ -1,0 +1,20 @@
+# build outputs
+/build/
+/out/
+/dist/
+/x64/
+/new/
+/Debug/
+/Release/
+/vcpkg_installed/
+/third_party/pdfium/
+*.tmp
+# Visual Studio
+/.vs/
+*.user
+*.suo
+*.VC.db
+*.VC.opendb
+# test scratch
+/tests/out/
+vcpkg_install.log

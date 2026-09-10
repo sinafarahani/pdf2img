@@ -1,0 +1,14 @@
+{
+  "name": "pdf2img",
+  "version-string": "1.1.0",
+  "description": "PDF to image converter (PDFium), command-line compatible with VeryPDF PDF2Image 2.1",
+  "dependencies": [
+    { "name": "qpdf", "default-features": false },
+    { "name": "tiff", "default-features": false, "features": [ "zip", "jpeg" ] },
+    "libjpeg-turbo",
+    "libpng",
+    "zlib",
+    "giflib"
+  ],
+  "builtin-baseline": "ef2ffdc545c7db91d2b1eef4ed1c6be71768b7dd"
+}

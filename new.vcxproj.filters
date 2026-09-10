@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src"><UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier></Filter>
+    <Filter Include="src\image"><UniqueIdentifier>{0B2E1D2A-7A1C-4C3E-9F7A-1B2C3D4E5F60}</UniqueIdentifier></Filter>
+    <Filter Include="src\encode"><UniqueIdentifier>{0B2E1D2A-7A1C-4C3E-9F7A-1B2C3D4E5F61}</UniqueIdentifier></Filter>
+    <Filter Include="src\render"><UniqueIdentifier>{0B2E1D2A-7A1C-4C3E-9F7A-1B2C3D4E5F62}</UniqueIdentifier></Filter>
+    <Filter Include="docs"><UniqueIdentifier>{0B2E1D2A-7A1C-4C3E-9F7A-1B2C3D4E5F63}</UniqueIdentifier></Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\cli.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\common.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\config.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\fsutil.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\ipc.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\log.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\naming.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\pipeline.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\child_process.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\supervisor.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\worker.cpp"><Filter>src</Filter></ClCompile>
+    <ClCompile Include="src\image\convert.cpp"><Filter>src\image</Filter></ClCompile>
+    <ClCompile Include="src\encode\tiff_writer.cpp"><Filter>src\encode</Filter></ClCompile>
+    <ClCompile Include="src\encode\jpeg_writer.cpp"><Filter>src\encode</Filter></ClCompile>
+    <ClCompile Include="src\encode\png_writer.cpp"><Filter>src\encode</Filter></ClCompile>
+    <ClCompile Include="src\encode\gif_writer.cpp"><Filter>src\encode</Filter></ClCompile>
+    <ClCompile Include="src\encode\simple_writers.cpp"><Filter>src\encode</Filter></ClCompile>
+    <ClCompile Include="src\render\pdf_document.cpp"><Filter>src\render</Filter></ClCompile>
+    <ClCompile Include="src\render\repair_qpdf.cpp"><Filter>src\render</Filter></ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\cli.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\common.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\config.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\fsutil.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\ipc.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\log.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\naming.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\pipeline.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\child_process.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\supervisor.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\worker.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\version.h"><Filter>src</Filter></ClInclude>
+    <ClInclude Include="src\image\image.h"><Filter>src\image</Filter></ClInclude>
+    <ClInclude Include="src\image\convert.h"><Filter>src\image</Filter></ClInclude>
+    <ClInclude Include="src\image\palettes.h"><Filter>src\image</Filter></ClInclude>
+    <ClInclude Include="src\encode\encoders.h"><Filter>src\encode</Filter></ClInclude>
+    <ClInclude Include="src\render\pdf_document.h"><Filter>src\render</Filter></ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\app.rc"><Filter>src</Filter></ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+    <None Include="docs\DESIGN.md"><Filter>docs</Filter></None>
+    <None Include="docs\OLD_TOOL_BEHAVIOR.md"><Filter>docs</Filter></None>
+  </ItemGroup>
+</Project>

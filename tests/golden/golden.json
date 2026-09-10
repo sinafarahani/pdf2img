@@ -1,0 +1,1408 @@
+﻿[
+    {
+        "case":  "A01_one_tif",
+        "args":  "-i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  349470,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "A02_three_jpg",
+        "args":  "-i {D}\\three.pdf -o {D}\\out.jpg",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.jpg",
+                          "size":  86960,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "out0002.jpg",
+                          "size":  87128,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "out0003.jpg",
+                          "size":  88481,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      }
+                  ]
+    },
+    {
+        "case":  "A03_three_png",
+        "args":  "-i {D}\\three.pdf -o {D}\\out.png",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.png",
+                          "size":  15500,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  100.99,
+                          "dpiY":  100.99,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "out0002.png",
+                          "size":  16048,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  100.99,
+                          "dpiY":  100.99,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "out0003.png",
+                          "size":  16323,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  100.99,
+                          "dpiY":  100.99,
+                          "frames":  1
+                      }
+                  ]
+    },
+    {
+        "case":  "A04_three_bmp",
+        "args":  "-i {D}\\three.pdf -o {D}\\out.bmp",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.bmp",
+                          "size":  2861990,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  100.99,
+                          "dpiY":  100.99,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "out0002.bmp",
+                          "size":  2861990,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  100.99,
+                          "dpiY":  100.99,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "out0003.bmp",
+                          "size":  2861990,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  100.99,
+                          "dpiY":  100.99,
+                          "frames":  1
+                      }
+                  ]
+    },
+    {
+        "case":  "A05_three_gif",
+        "args":  "-i {D}\\three.pdf -o {D}\\out.gif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.gif",
+                          "size":  46562,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format8bppIndexed",
+                          "dpiX":  96,
+                          "dpiY":  96,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "out0002.gif",
+                          "size":  47028,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format8bppIndexed",
+                          "dpiX":  96,
+                          "dpiY":  96,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "out0003.gif",
+                          "size":  46894,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format8bppIndexed",
+                          "dpiX":  96,
+                          "dpiY":  96,
+                          "frames":  1
+                      }
+                  ]
+    },
+    {
+        "case":  "A06_three_pcx",
+        "args":  "-i {D}\\three.pdf -o {D}\\out.pcx",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.pcx",
+                          "size":  143810
+                      },
+                      {
+                          "name":  "out0002.pcx",
+                          "size":  143760
+                      },
+                      {
+                          "name":  "out0003.pcx",
+                          "size":  143883
+                      }
+                  ]
+    },
+    {
+        "case":  "A08_three_wmf",
+        "args":  "-i {D}\\three.pdf -o {D}\\out.wmf",
+        "exitCode":  0,
+        "dialogs":  [
+                        "Purchase prompt"
+                    ],
+        "files":  [
+                      {
+                          "name":  "out.wmf",
+                          "size":  372,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format32bppRgb",
+                          "dpiX":  81.28,
+                          "dpiY":  83.13,
+                          "frames":  1
+                      }
+                  ]
+    },
+    {
+        "case":  "A10_three_m_tif",
+        "args":  "-m -i {D}\\three.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out.tif",
+                          "size":  404679,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  3,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "A11_three_m_jpg",
+        "args":  "-m -i {D}\\three.pdf -o {D}\\out.jpg",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.jpg",
+                          "size":  86960,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "out0002.jpg",
+                          "size":  87128,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "out0003.jpg",
+                          "size":  88481,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      }
+                  ]
+    },
+    {
+        "case":  "A12_three_no_o",
+        "args":  "-i {D}\\three.pdf",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "three0001.tif",
+                          "size":  133772,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "three0002.tif",
+                          "size":  135422,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "three0003.tif",
+                          "size":  135408,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "A13_three_noext",
+        "args":  "-i {D}\\three.pdf -o {D}\\outnoext",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "outnoext0001",
+                          "size":  0
+                      },
+                      {
+                          "name":  "outnoext0002",
+                          "size":  0
+                      },
+                      {
+                          "name":  "outnoext0003",
+                          "size":  0
+                      }
+                  ]
+    },
+    {
+        "case":  "A14_three_badext",
+        "args":  "-i {D}\\three.pdf -o {D}\\out.xyz",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.xyz",
+                          "size":  0
+                      },
+                      {
+                          "name":  "out0002.xyz",
+                          "size":  0
+                      },
+                      {
+                          "name":  "out0003.xyz",
+                          "size":  0
+                      }
+                  ]
+    },
+    {
+        "case":  "A15_positional",
+        "args":  "{D}\\three.pdf -o {D}\\out.tif",
+        "exitCode":  1,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+
+                  ]
+    },
+    {
+        "case":  "A16_wildcard",
+        "args":  "-i {D}\\*.pdf -o {D}\\*.jpg",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "three0001.jpg",
+                          "size":  86960,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "three0002.jpg",
+                          "size":  87128,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      },
+                      {
+                          "name":  "three0003.jpg",
+                          "size":  88481,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      }
+                  ]
+    },
+    {
+        "case":  "A17_nodir",
+        "args":  "-i {D}\\three.pdf -o {D}\\nodir\\sub\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+
+                  ]
+    },
+    {
+        "case":  "A18_f2_l3",
+        "args":  "-f 2 -l 3 -i {D}\\three.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0002.tif",
+                          "size":  135422,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "out0003.tif",
+                          "size":  135408,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "A19_f5",
+        "args":  "-f 5 -i {D}\\three.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  133772,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "out0002.tif",
+                          "size":  135422,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "out0003.tif",
+                          "size":  135408,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "A21_f3_l2",
+        "args":  "-f 3 -l 2 -i {D}\\three.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0003.tif",
+                          "size":  135408,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "A22_tiff_ext",
+        "args":  "-i {D}\\one.pdf -o {D}\\out.tiff",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tiff",
+                          "size":  349470,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "B01_r300",
+        "args":  "-r 300 -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  2621060,
+                          "width":  2550,
+                          "height":  3300,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  300,
+                          "dpiY":  300,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  3300
+                      }
+                  ]
+    },
+    {
+        "case":  "B02_r200x100",
+        "args":  "-r 200x100 -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  613400,
+                          "width":  1700,
+                          "height":  1100,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  200,
+                          "dpiY":  100,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1100
+                      }
+                  ]
+    },
+    {
+        "case":  "B03_b1",
+        "args":  "-b 1 -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  16068,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format1bppIndexed",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  0,
+                          "tiff_bitsPerSample":  1,
+                          "tiff_samplesPerPixel":  1,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "B04_b1_g4",
+        "args":  "-b 1 -c g4 -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  4630,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format1bppIndexed",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  4,
+                          "tiff_photometric":  0,
+                          "tiff_bitsPerSample":  1,
+                          "tiff_samplesPerPixel":  1,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "B06_b4",
+        "args":  "-b 4 -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  35228,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format4bppIndexed",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  3,
+                          "tiff_bitsPerSample":  4,
+                          "tiff_samplesPerPixel":  1,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "B07_b8",
+        "args":  "-b 8 -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  903952,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format8bppIndexed",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  3,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  1,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "B08_b8_g",
+        "args":  "-b 8 -g -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  41052,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format8bppIndexed",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  1,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  1,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "B09_lzw",
+        "args":  "-c lzw -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  27114,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  5,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "B11_cjpeg",
+        "args":  "-c jpeg -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  180049,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  7,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1112
+                      }
+                  ]
+    },
+    {
+        "case":  "B12_classf",
+        "args":  "-c ClassF -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  6418,
+                          "width":  1728,
+                          "height":  1074,
+                          "pixelFormat":  "Format1bppIndexed",
+                          "dpiX":  204,
+                          "dpiY":  98,
+                          "frames":  1,
+                          "tiff_compression":  4,
+                          "tiff_photometric":  0,
+                          "tiff_bitsPerSample":  1,
+                          "tiff_samplesPerPixel":  1,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1074
+                      }
+                  ]
+    },
+    {
+        "case":  "B13_classf196_ex",
+        "args":  "-i {D}\\three.pdf -o {D}\\out.tif -b 1 -c ClassF196 -r 204x196 -m",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out.tif",
+                          "size":  24883,
+                          "width":  1728,
+                          "height":  2148,
+                          "pixelFormat":  "Format1bppIndexed",
+                          "dpiX":  204,
+                          "dpiY":  196,
+                          "frames":  3,
+                          "tiff_compression":  4,
+                          "tiff_photometric":  0,
+                          "tiff_bitsPerSample":  1,
+                          "tiff_samplesPerPixel":  1,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  2148
+                      }
+                  ]
+    },
+    {
+        "case":  "B14_q20",
+        "args":  "-q 20 -i {D}\\one.pdf -o {D}\\out.jpg",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out.jpg",
+                          "size":  34416,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      }
+                  ]
+    },
+    {
+        "case":  "B15_b8_jpg",
+        "args":  "-b 8 -i {D}\\one.pdf -o {D}\\out.jpg",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out.jpg",
+                          "size":  93170,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      }
+                  ]
+    },
+    {
+        "case":  "B17_b8_g_jpg",
+        "args":  "-b 8 -g -i {D}\\one.pdf -o {D}\\out.jpg",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out.jpg",
+                          "size":  72478,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      }
+                  ]
+    },
+    {
+        "case":  "B18_b24_g4",
+        "args":  "-b 24 -c g4 -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  5756,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format1bppIndexed",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  4,
+                          "tiff_photometric":  0,
+                          "tiff_bitsPerSample":  1,
+                          "tiff_samplesPerPixel":  1,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "C01_missing",
+        "args":  "-i {D}\\nonexist.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+
+                  ]
+    },
+    {
+        "case":  "C02_badopt",
+        "args":  "-z -i {D}\\one.pdf -o {D}\\out.tif",
+        "exitCode":  1,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+
+                  ]
+    },
+    {
+        "case":  "C03_enc",
+        "args":  "-i {D}\\enc.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+
+                  ]
+    },
+    {
+        "case":  "C05_dflag",
+        "args":  "-d -i {D}\\three.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "three\\three0001.tif",
+                          "size":  133772,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "three\\three0002.tif",
+                          "size":  135422,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "three\\three0003.tif",
+                          "size":  135408,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "C06_dollar",
+        "args":  "-$ -i {D}\\three.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  133772,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "out0002.tif",
+                          "size":  135422,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "out0003.tif",
+                          "size":  135408,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "C07_huge",
+        "args":  "-i {D}\\huge.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  1383208,
+                          "width":  6060,
+                          "height":  4040,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  4040
+                      }
+                  ]
+    },
+    {
+        "case":  "C08_ini_pre",
+        "args":  "-i {D}\\three.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+                        "Error"
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  133772,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "out0002.tif",
+                          "size":  135422,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "out0003.tif",
+                          "size":  135408,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "C09_ini_suffix",
+        "args":  "-i {D}\\three.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out_001.tif",
+                          "size":  133772,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "out_002.tif",
+                          "size":  135422,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "out_003.tif",
+                          "size":  135408,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "C10_corrupt",
+        "args":  "-i {D}\\corrupt.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+
+                  ]
+    },
+    {
+        "case":  "C12_crop",
+        "args":  "-i {D}\\crop.pdf -o {D}\\out.tif",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  36980,
+                          "width":  561,
+                          "height":  421,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  421
+                      }
+                  ]
+    },
+    {
+        "case":  "C18_overwrite",
+        "args":  "-i {D}\\one.pdf -o {D}\\out.tif  (pre-existing garbage out0001.tif/out0002.tif)",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out0001.tif",
+                          "size":  349470,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      },
+                      {
+                          "name":  "out0002.tif",
+                          "size":  8
+                      }
+                  ]
+    },
+    {
+        "case":  "C19_unicode",
+        "args":  "-i \"{D}\\پوشه تست\\ورودی تست.pdf\" -o \"{D}\\پوشه تست\\خروجی.tif\"",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "Ù¾ÙˆØ´Ù‡ ØªØ³Øª\\Ø®Ø±ÙˆØ¬ÛŒ0001.tif",
+                          "size":  349470,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1,
+                          "tiff_compression":  32773,
+                          "tiff_photometric":  2,
+                          "tiff_bitsPerSample":  8,
+                          "tiff_samplesPerPixel":  3,
+                          "tiff_fillOrder":  2,
+                          "tiff_rowsPerStrip":  1111
+                      }
+                  ]
+    },
+    {
+        "case":  "C20_one_jpg_plain",
+        "args":  "-i {D}\\one.pdf -o {D}\\out.jpg",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out.jpg",
+                          "size":  93960,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  101,
+                          "dpiY":  101,
+                          "frames":  1
+                      }
+                  ]
+    },
+    {
+        "case":  "C21_one_png_plain",
+        "args":  "-i {D}\\one.pdf -o {D}\\out.png",
+        "exitCode":  0,
+        "dialogs":  [
+
+                    ],
+        "files":  [
+                      {
+                          "name":  "out.png",
+                          "size":  16894,
+                          "width":  858,
+                          "height":  1111,
+                          "pixelFormat":  "Format24bppRgb",
+                          "dpiX":  100.99,
+                          "dpiY":  100.99,
+                          "frames":  1
+                      }
+                  ]
+    }
+]

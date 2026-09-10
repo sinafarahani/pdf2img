@@ -1,0 +1,136 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  # Must match "builtin-baseline" in vcpkg.json.
+  VCPKG_COMMIT: ef2ffdc545c7db91d2b1eef4ed1c6be71768b7dd
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: windows-x64, os: windows-2022, preset: release, triplet: x64-windows-static, exe: pdf2img.exe }
+          - { name: linux-x64, os: ubuntu-22.04, preset: linux-release, triplet: x64-linux, exe: pdf2img }
+          - { name: linux-arm64, os: ubuntu-22.04-arm, preset: linux-release, triplet: arm64-linux, exe: pdf2img }
+          - { name: macos-arm64, os: macos-14, preset: macos-release, triplet: arm64-osx, exe: pdf2img }
+          - { name: macos-x64, os: macos-15-intel, preset: macos-release, triplet: x64-osx, exe: pdf2img }
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Paths
+        shell: bash
+        run: |
+          echo "VCPKG_ROOT=$RUNNER_TEMP/vcpkg" >> "$GITHUB_ENV"
+          echo "VCPKG_DEFAULT_BINARY_CACHE=$RUNNER_TEMP/vcpkg-cache" >> "$GITHUB_ENV"
+          mkdir -p "$RUNNER_TEMP/vcpkg-cache"
+
+      - name: Build tools (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build nasm pkg-config python3-pip curl zip unzip tar
+          # vcpkg has no prebuilt tools for arm64 Linux: use the system's.
+          if [ "$(uname -m)" = "aarch64" ]; then echo "VCPKG_FORCE_SYSTEM_BINARIES=1" >> "$GITHUB_ENV"; fi
+          # CMake presets need CMake 3.25+.
+          v=$(cmake --version 2>/dev/null | head -1 | awk '{print $3}')
+          if [ -z "$v" ] || [ "$(printf '%s\n' 3.25 "$v" | sort -V | head -1)" != "3.25" ]; then
+            python3 -m pip install --user --upgrade cmake
+            echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          fi
+          if ! command -v pwsh >/dev/null; then
+            arch=x64; [ "$(uname -m)" = "aarch64" ] && arch=arm64
+            curl -sSL -o /tmp/pwsh.tgz "https://github.com/PowerShell/PowerShell/releases/download/v7.4.6/powershell-7.4.6-linux-$arch.tar.gz"
+            sudo mkdir -p /opt/microsoft/powershell/7
+            sudo tar -xzf /tmp/pwsh.tgz -C /opt/microsoft/powershell/7
+            sudo chmod +x /opt/microsoft/powershell/7/pwsh
+            sudo ln -sf /opt/microsoft/powershell/7/pwsh /usr/local/bin/pwsh
+          fi
+
+      - name: Build tools (macOS)
+        if: runner.os == 'macOS'
+        run: brew install ninja nasm pkg-config
+
+      - name: MSVC environment (Windows)
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: vcpkg binary cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/vcpkg-cache
+          key: vcpkg-${{ matrix.name }}-${{ env.VCPKG_COMMIT }}-${{ hashFiles('vcpkg.json', 'cmake/triplets/*') }}
+          restore-keys: vcpkg-${{ matrix.name }}-${{ env.VCPKG_COMMIT }}-
+
+      - name: vcpkg
+        shell: bash
+        run: |
+          git clone --quiet https://github.com/microsoft/vcpkg "$VCPKG_ROOT"
+          git -C "$VCPKG_ROOT" checkout --quiet "$VCPKG_COMMIT"
+          if [ "$RUNNER_OS" = "Windows" ]; then "$VCPKG_ROOT/bootstrap-vcpkg.bat" -disableMetrics; else "$VCPKG_ROOT/bootstrap-vcpkg.sh" -disableMetrics; fi
+
+      - name: Configure
+        run: cmake --preset ${{ matrix.preset }}
+
+      - name: Build
+        run: cmake --build --preset ${{ matrix.preset }}
+
+      - name: Unit tests
+        run: ctest --preset ${{ matrix.preset }}
+
+      - name: Compatibility tests
+        shell: pwsh
+        run: ./tests/run_golden.ps1 -Exe build/${{ matrix.preset }}/${{ matrix.exe }} -Quiet
+
+      - name: Robustness tests
+        shell: pwsh
+        run: ./tests/run_robustness.ps1 -Exe build/${{ matrix.preset }}/${{ matrix.exe }}
+
+      - name: Package
+        shell: pwsh
+        env:
+          PKG_VERSION: ${{ github.ref_type == 'tag' && github.ref_name || 'dev' }}
+        run: ./scripts/package.ps1 -BuildDir build/${{ matrix.preset }} -Name "pdf2img-$env:PKG_VERSION-${{ matrix.name }}" -Triplet ${{ matrix.triplet }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pdf2img-${{ matrix.name }}
+          path: dist/*
+          if-no-files-found: error
+
+  release:
+    name: release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Checksums
+        run: cd dist && sha256sum * > SHA256SUMS.txt
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" \
+            --title "pdf2img $GITHUB_REF_NAME" --generate-notes
