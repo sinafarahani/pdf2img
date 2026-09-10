@@ -190,8 +190,11 @@ bool test_allocation(std::string& msg) {
     const size_t bytes = static_cast<size_t>(mb) << 20;
     uint64_t* p = static_cast<uint64_t*>(std::malloc(bytes));
     if (!p) { msg = "test allocation of " + std::to_string(mb) + " MB failed"; return false; }
-    uint64_t x = 88172645463325252ull; // pseudo-random fill: the pages stay resident (no zero-page or compression tricks)
-    for (size_t i = 0; i < bytes / sizeof(uint64_t); ++i) { x ^= x << 13; x ^= x >> 7; x ^= x << 17; p[i] = x; }
+    // Pseudo-random fill through a volatile pointer: the pages stay resident (no zero-page or compression tricks), and
+    // the compiler cannot drop the allocation as dead code (Clang does that for write-only malloc'd memory).
+    volatile uint64_t* vp = p;
+    uint64_t x = 88172645463325252ull;
+    for (size_t i = 0; i < bytes / sizeof(uint64_t); ++i) { x ^= x << 13; x ^= x >> 7; x ^= x << 17; vp[i] = x; }
     std::this_thread::sleep_for(std::chrono::seconds(3));
     std::free(p);
     return true;

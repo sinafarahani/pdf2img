@@ -92,14 +92,16 @@ void FileMapping::close() {
 // Read-only memory mapping of the PDF, shared by the page cache across all worker processes.
 bool FileMapping::open(const std::wstring& path, std::string& err) {
     close();
-    const int fd = ::open(narrow(path).c_str(), O_RDONLY | O_CLOEXEC);
+    // O_NONBLOCK: opening a named pipe must not wait for a writer (it is rejected below as not a regular file).
+    const int fd = ::open(narrow(path).c_str(), O_RDONLY | O_CLOEXEC | O_NONBLOCK);
     if (fd < 0) {
         const int e = errno;
         err = (e == ENOENT || e == ENOTDIR) ? "file not found" : ("cannot open file (" + std::string(std::strerror(e)) + ")");
         return false;
     }
     struct stat st{};
-    if (fstat(fd, &st) != 0 || !S_ISREG(st.st_mode) || st.st_size < 0 || st.st_size > (4ll << 30)) {
+    if (fstat(fd, &st) == 0 && !S_ISREG(st.st_mode)) { ::close(fd); err = "not a regular file"; return false; }
+    if (fstat(fd, &st) != 0 || st.st_size < 0 || st.st_size > (4ll << 30)) {
         ::close(fd);
         err = "file too large or size unavailable";
         return false;

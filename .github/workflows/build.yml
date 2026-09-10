@@ -68,7 +68,11 @@ jobs:
 
       - name: Build tools (macOS)
         if: runner.os == 'macOS'
-        run: brew install ninja nasm pkg-config
+        run: |
+          brew install ninja nasm pkg-config
+          # Keep Homebrew's image libraries out of the default search paths (/usr/local on Intel): vcpkg builds its own,
+          # and Homebrew's jpeg-turbo has a different API version (JPEG 8).
+          for f in jpeg-turbo jpeg libtiff libpng giflib zlib qpdf; do brew unlink "$f" 2>/dev/null || true; done
 
       - name: vcpkg binary cache
         uses: actions/cache@v4

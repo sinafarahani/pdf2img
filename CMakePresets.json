@@ -34,12 +34,12 @@
     },
     {
       "name": "macos-release",
-      "displayName": "macOS release (Apple silicon or Intel, macOS 11+)",
+      "displayName": "macOS release (Apple silicon or Intel, macOS 13+)",
       "inherits": "base",
       "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Darwin" },
       "cacheVariables": {
         "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/triplets",
-        "CMAKE_OSX_DEPLOYMENT_TARGET": "11.0"
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "13.0"
       }
     }
   ],

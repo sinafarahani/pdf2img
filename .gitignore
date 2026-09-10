@@ -7,7 +7,7 @@
 /Debug/
 /Release/
 /vcpkg_installed/
-/third_party/pdfium/
+/third_party/pdfium*/
 *.tmp
 # Visual Studio
 /.vs/

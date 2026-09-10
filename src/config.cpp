@@ -35,7 +35,7 @@ static std::wstring trim(const std::wstring& s) {
 }
 
 // The GetPrivateProfileString rules that matter here: [Options] section and keys matched case-insensitively, the value
-// trimmed and one pair of surrounding quotes removed, ';' starts a comment line. UTF-8 file (a BOM is allowed).
+// trimmed and one pair of surrounding quotes removed, ';' starts a comment line. UTF-8 (BOM allowed) or UTF-16LE with BOM.
 static std::wstring ini_string(const std::wstring& file, const wchar_t* key, const wchar_t* def) {
     FILE* f = std::fopen(narrow(file).c_str(), "rb");
     if (!f) return def;
@@ -44,8 +44,22 @@ static std::wstring ini_string(const std::wstring& file, const wchar_t* key, con
     size_t n;
     while ((n = std::fread(buf, 1, sizeof buf, f)) > 0) content.append(buf, n);
     std::fclose(f);
-    if (content.rfind("\xEF\xBB\xBF", 0) == 0) content.erase(0, 3);
-    const std::wstring text = widen(content);
+    std::wstring text;
+    if (content.size() >= 2 && static_cast<unsigned char>(content[0]) == 0xFF && static_cast<unsigned char>(content[1]) == 0xFE) {
+        // UTF-16LE with BOM ("Unicode" in Windows Notepad), which GetPrivateProfileString reads too.
+        auto unit = [&](size_t i) { return static_cast<uint32_t>(static_cast<unsigned char>(content[i]) | (static_cast<unsigned char>(content[i + 1]) << 8)); };
+        for (size_t i = 2; i + 1 < content.size(); i += 2) {
+            uint32_t u = unit(i);
+            if (u >= 0xD800 && u <= 0xDBFF && i + 3 < content.size()) {
+                const uint32_t lo = unit(i + 2);
+                if (lo >= 0xDC00 && lo <= 0xDFFF) { u = 0x10000 + ((u - 0xD800) << 10) + (lo - 0xDC00); i += 2; }
+            }
+            text += static_cast<wchar_t>(u);
+        }
+    } else {
+        if (content.rfind("\xEF\xBB\xBF", 0) == 0) content.erase(0, 3);
+        text = widen(content);
+    }
     const std::wstring wanted = to_lower_ascii(std::wstring(key));
     bool inSection = false;
     size_t pos = 0;

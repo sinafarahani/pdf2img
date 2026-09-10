@@ -190,9 +190,14 @@ std::vector<std::wstring> find_files(const std::wstring& dir, const std::wstring
 #else
     DIR* d = ::opendir(dir.empty() ? "." : narrow(dir).c_str());
     if (!d) return out;
-    const std::string pat = narrow(pattern);
+    // Only * and ? are wildcards (as on Windows): '[', ']' and '\' are matched literally.
+    std::string pat;
+    for (char c : narrow(pattern)) {
+        if (c == '[' || c == ']' || c == '\\') pat += '\\';
+        pat += c;
+    }
     while (const dirent* e = ::readdir(d)) {
-        if (::fnmatch(pat.c_str(), e->d_name, FNM_PERIOD) != 0) continue;
+        if (::fnmatch(pat.c_str(), e->d_name, 0) != 0) continue;
         std::wstring full = path_join(dir, widen(e->d_name));
         if (!file_exists(full)) continue;
         out.push_back(std::move(full));
@@ -235,6 +240,7 @@ void disable_error_dialogs() {
 #endif
 #else
     std::signal(SIGPIPE, SIG_IGN);
+    std::signal(SIGCHLD, SIG_DFL); // an ignored SIGCHLD inherited from the caller would make waitpid() lose exit statuses
 #endif
 }
 

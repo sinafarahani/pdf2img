@@ -299,11 +299,13 @@ std::string ChildProcess::exit_description() {
 
 uint64_t ChildProcess::resident_bytes() const {
     if (pid_ == 0 || exited_) return 0;
+    // Private memory only, like the Windows job limit: file-backed pages (the memory-mapped input PDF, the PDFium
+    // library) are not counted.
 #if defined(__APPLE__)
-    // Physical footprint (what Activity Monitor calls "Memory"), else the resident size.
+    // Physical footprint (what Activity Monitor calls "Memory"); the resident size only as a fallback.
     rusage_info_v2 ri{};
-    if (proc_pid_rusage(static_cast<int>(pid_), RUSAGE_INFO_V2, reinterpret_cast<rusage_info_t*>(&ri)) == 0)
-        return ri.ri_phys_footprint > ri.ri_resident_size ? ri.ri_phys_footprint : ri.ri_resident_size;
+    if (proc_pid_rusage(static_cast<int>(pid_), RUSAGE_INFO_V2, reinterpret_cast<rusage_info_t*>(&ri)) == 0 && ri.ri_phys_footprint > 0)
+        return ri.ri_phys_footprint;
     proc_taskinfo ti{};
     if (proc_pidinfo(static_cast<int>(pid_), PROC_PIDTASKINFO, 0, &ti, sizeof ti) <= 0) return 0;
     return ti.pti_resident_size;
@@ -312,11 +314,12 @@ uint64_t ChildProcess::resident_bytes() const {
     std::snprintf(path, sizeof path, "/proc/%lu/statm", pid_);
     FILE* f = std::fopen(path, "r");
     if (!f) return 0;
-    unsigned long long size = 0, resident = 0;
-    const int n = std::fscanf(f, "%llu %llu", &size, &resident);
+    unsigned long long size = 0, resident = 0, shared = 0; // pages; "shared" = resident file-backed pages
+    const int n = std::fscanf(f, "%llu %llu %llu", &size, &resident, &shared);
     std::fclose(f);
-    if (n != 2) return 0;
-    return static_cast<uint64_t>(resident) * static_cast<uint64_t>(::sysconf(_SC_PAGESIZE));
+    if (n != 3) return 0;
+    const unsigned long long privatePages = resident > shared ? resident - shared : 1;
+    return static_cast<uint64_t>(privatePages) * static_cast<uint64_t>(::sysconf(_SC_PAGESIZE));
 #endif
 }
 

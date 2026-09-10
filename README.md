@@ -27,8 +27,8 @@ Prebuilt archives are on the [Releases page](../../releases/latest):
 | Windows 10 / 11, x64 | `pdf2img-<version>-windows-x64.zip` |
 | Linux x64 (glibc 2.35 or newer: Ubuntu 22.04+, Debian 12+, Fedora 36+, RHEL 9+) | `pdf2img-<version>-linux-x64.tar.gz` |
 | Linux arm64 (same) | `pdf2img-<version>-linux-arm64.tar.gz` |
-| macOS 11 or newer, Apple silicon | `pdf2img-<version>-macos-arm64.tar.gz` |
-| macOS 11 or newer, Intel | `pdf2img-<version>-macos-x64.tar.gz` |
+| macOS 13 or newer, Apple silicon | `pdf2img-<version>-macos-arm64.tar.gz` |
+| macOS 13 or newer, Intel | `pdf2img-<version>-macos-x64.tar.gz` |
 
 Unpack the archive anywhere and keep the executable and the PDFium library (`pdfium.dll`, `libpdfium.so` or
 `libpdfium.dylib`) in the same folder. Nothing else is needed: no Ghostscript, no runtime to install.

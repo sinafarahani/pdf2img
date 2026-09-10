@@ -36,7 +36,14 @@ elseif(APPLE)
 else()
   set(_pdfium_asset "pdfium-linux-${_pdfium_arch}.tgz")
 endif()
-set(PDFIUM_DIR "${CMAKE_SOURCE_DIR}/third_party/pdfium")
+if(WIN32)
+  set(PDFIUM_DIR "${CMAKE_SOURCE_DIR}/third_party/pdfium")   # also used by new.vcxproj
+else()
+  # One folder per platform, so that Windows and Linux/WSL builds from the same checkout do not replace each other's.
+  string(REPLACE ".tgz" "" _pdfium_name "${_pdfium_asset}")
+  set(PDFIUM_DIR "${CMAKE_SOURCE_DIR}/third_party/${_pdfium_name}")
+endif()
+set(PDF2IMG_PDFIUM_DIR "${PDFIUM_DIR}" CACHE INTERNAL "PDFium package used by this build (read by scripts/package.ps1)")
 set(_pdfium_stamp "${PDFIUM_DIR}/PINNED_RELEASE.txt")
 set(_pdfium_want "${PDF2IMG_PDFIUM_RELEASE} ${_pdfium_asset}")
 set(_pdfium_have "")
@@ -68,6 +75,8 @@ if(NOT _pdfium_have STREQUAL _pdfium_want)
   endif()
   file(WRITE "${_pdfium_stamp}" "${_pdfium_want}\n")
 endif()
+# PDFium_ROOT: the package's own find_library/find_path calls search the pinned copy before any system-wide one.
+set(PDFium_ROOT "${PDFIUM_DIR}")
 find_package(PDFium REQUIRED PATHS "${PDFIUM_DIR}" NO_DEFAULT_PATH)
 if(UNIX AND NOT APPLE)
   # Link as -lpdfium so that the executable does not record the build machine's path to the library.
@@ -124,8 +133,11 @@ if(MSVC)
 else()
   target_compile_options(pdf2img_core PUBLIC -Wall -Wextra)
 endif()
-# qpdf's imported target references bare library names (zs/zsd/jpeg); make the vcpkg lib dirs searchable.
 if(DEFINED VCPKG_INSTALLED_DIR AND DEFINED VCPKG_TARGET_TRIPLET)
+  # vcpkg's headers must win over copies in default search paths (e.g. Homebrew's libjpeg in /usr/local/include on
+  # Intel Macs, whose JPEG-8 API does not match the vcpkg library that is linked).
+  target_include_directories(pdf2img_core BEFORE PUBLIC "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include")
+  # qpdf's imported target references bare library names (zs/zsd/jpeg); make the vcpkg lib dirs searchable.
   target_link_directories(pdf2img_core PUBLIC
     "$<IF:$<CONFIG:Debug>,${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/debug/lib,${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib>")
 endif()

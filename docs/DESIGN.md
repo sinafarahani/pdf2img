@@ -40,9 +40,10 @@ pdf2img (supervisor)  --stdin/stdout pipes-->  pdf2img --worker  (x N, one PDFiu
   code 5. The other pages continue on other workers.
 - **Whole run**: default 30 minutes; unfinished inputs are named in the error output.
 - **Memory**: Windows runs each worker in a Job Object with a process memory limit (default 2 GB) that also kills the
-  worker when the supervisor ends. Linux/macOS have no Job Objects: the supervisor reads the resident memory of busy
-  workers (`/proc/<pid>/statm`, `proc_pidinfo`) and kills a worker that exceeds the limit; workers exit on their own
-  when the supervisor disappears (they watch their parent process).
+  worker when the supervisor ends. Linux/macOS have no Job Objects: the supervisor reads the private memory of busy
+  workers (resident minus file-backed pages from `/proc/<pid>/statm`; the physical footprint from `proc_pid_rusage`,
+  so the memory-mapped input PDF is not counted, as on Windows) about ten times a second and kills a worker that
+  exceeds the limit; workers exit on their own when the supervisor disappears (they watch their parent process).
 - **Crashes**: work lost to a worker that dies is retried once on another worker. Work sent to a worker that died
   before acknowledging it (`BEGIN`) was never attempted and is resubmitted without using up the retry.
 - **Oversized pages**: if a page bitmap would exceed 1.5 GB (or 65000 px per side) the page is rendered at the

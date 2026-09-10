@@ -32,6 +32,11 @@ Copy-Item (Join-Path $root "docs/pdf2img.ini.example") $stage
 $lic = Join-Path $stage "licenses"
 New-Item -ItemType Directory -Force (Join-Path $lic "pdfium") | Out-Null
 $pdfium = Join-Path $root "third_party/pdfium"
+$cache = Join-Path $BuildDir "CMakeCache.txt"
+if (Test-Path $cache) {
+    $m = Select-String -Path $cache -Pattern '^PDF2IMG_PDFIUM_DIR:INTERNAL=(.+)$' | Select-Object -First 1
+    if ($m) { $pdfium = $m.Matches[0].Groups[1].Value }
+}
 Copy-Item (Join-Path $pdfium "LICENSE") (Join-Path $lic "pdfium/LICENSE.txt")
 if (Test-Path (Join-Path $pdfium "licenses")) { Copy-Item (Join-Path $pdfium "licenses/*") (Join-Path $lic "pdfium") }
 $installed = Join-Path $root "vcpkg_installed"

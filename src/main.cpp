@@ -11,6 +11,12 @@
 #include <string>
 #include <vector>
 
+#ifndef _WIN32
+#include <cerrno>
+#include <fcntl.h>
+#include <unistd.h>
+#endif
+
 using namespace p2i;
 
 static void print_usage(bool withExtras) {
@@ -56,6 +62,13 @@ static int run(int argc, wchar_t** argv) {
 int wmain(int argc, wchar_t** argv) { return run(argc, argv); }
 #else
 int main(int argc, char** argv) {
+    // Descriptors 0-2 must exist (a caller may have closed them): otherwise the next open() - an input PDF, an output
+    // image - would get one of them, and anything written to stdout/stderr would end up in that file.
+    for (int fd = 0; fd <= 2; ++fd) {
+        if (fcntl(fd, F_GETFD) != -1 || errno != EBADF) continue;
+        const int n = open("/dev/null", fd == 0 ? O_RDONLY : O_WRONLY);
+        if (n >= 0 && n != fd) { dup2(n, fd); close(n); }
+    }
     // Arguments arrive as bytes (normally UTF-8); widen() keeps any other bytes intact (see common.h).
     std::vector<std::wstring> args;
     args.reserve(static_cast<size_t>(argc));

@@ -21,14 +21,14 @@ FILE* open_file_for_writing(const std::wstring& path); // fopen(path, "wb")
 bool create_new_file(const std::wstring& path);        // atomically creates an empty file; false if it exists
 std::wstring temp_directory();                         // %TEMP% (Windows), $TMPDIR or /tmp; "" if unavailable
 // Regular files in `dir` whose name matches `pattern` (* and ?), as full paths, unsorted.
-// Windows: FindFirstFileEx semantics (case-insensitive); elsewhere fnmatch (case-sensitive).
+// Windows: FindFirstFileEx semantics (case-insensitive); elsewhere fnmatch (case-sensitive, other characters literal).
 std::vector<std::wstring> find_files(const std::wstring& dir, const std::wstring& pattern);
 // Temporary name for writing `target` (same directory): "<target>.<pid>.tmp", or a short "~p2i_<pid>_<hash>.tmp" when the
 // name would exceed the 255-character component limit. The supervisor uses the pid overload for cleanup.
 std::wstring temp_name_for(const std::wstring& target);
 std::wstring temp_name_for(const std::wstring& target, unsigned long pid);
 // Hardening for unattended use. Windows: no error dialogs, CRT asserts/aborts go to stderr.
-// Linux/macOS: SIGPIPE is ignored (a vanished worker or reader must not kill the process).
+// Linux/macOS: SIGPIPE is ignored (a vanished worker or reader must not kill the process), SIGCHLD is set to default.
 void disable_error_dialogs();
 unsigned hardware_threads();
 
