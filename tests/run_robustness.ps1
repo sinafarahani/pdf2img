@@ -95,8 +95,9 @@ $txt = Text $log
 Check "10 log file: nothing on success, error with masked password" ($ok.code -eq 0 -and $afterOk.Length -eq 0 -and $bad.code -eq 7 -and $txt -match '-upw \*\*\*' -and $txt -notmatch 'Wr0ngPass' -and $txt -match 'error: ') ($txt.Trim() -replace "`r?`n", ' | ')
 
 # 11. worker memory limit
-$r = Run @('-i', (Join-Path $pdfs "one.pdf"), '-o', (In "t11/x.png")) @{ PDF2IMG_WORKER_MEMORY_MB = 256; PDF2IMG_TEST_ALLOC_MB = 700 }
-Check "11 worker over the memory limit: page fails with exit 3" ($r.code -eq 3 -and $r.err -match 'memory limit|allocation') "code=$($r.code) $($r.err.Trim())"
+$r = Run @('-v', '-i', (Join-Path $pdfs "one.pdf"), '-o', (In "t11/x.png")) @{ PDF2IMG_WORKER_MEMORY_MB = 256; PDF2IMG_TEST_ALLOC_MB = 700 }
+$ok11 = $r.code -eq 3 -and $r.err -match 'exceeded the memory limit|allocation of 700 MB failed'
+Check "11 worker over the memory limit: page fails with exit 3" $ok11 ("code=$($r.code) " + $(if ($ok11) { "" } else { ($r.err.Trim() -split "`n" | Select-Object -Last 8) -join ' | ' }))
 
 # 12. damaged PDF (no header): repaired with qpdf, converted, warning
 $r = Run @('-i', (Join-Path $pdfs "damaged.pdf"), '-o', (In "t12/x.png"))

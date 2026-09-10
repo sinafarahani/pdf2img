@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include <atomic>
+#include <cerrno>
 #include <cstdio>
 #include <cstdlib>
 #include <deque>
@@ -76,6 +77,7 @@ struct Worker {
     bool killedByUs = false;
     bool fatalReported = false;  // worker sent FATAL (could not start) before exiting
     bool started = false;        // worker acknowledged (BEGIN) the command it is busy with
+    bool memoryUnknown = false;  // Linux/macOS: its memory use could not be read (reported once)
     struct PendingFailure { int code; std::string msg; }; // inside a MULTI unit: PAGEFAIL (code != 0) or warning (code 0)
     std::vector<PendingFailure> unitFailures;             // committed when the unit ends, dropped if the unit is retried
     bool opening = false;       // current operation is an OPEN (no unit)
@@ -492,7 +494,12 @@ void Supervisor::check_timeouts() {
         for (auto& wp : workers_) {
             Worker& w = *wp;
             if (w.dead || !w.busy || w.killedByUs) continue;
-            if (w.proc.resident_bytes() <= limit) continue;
+            const uint64_t used = w.proc.resident_bytes();
+            if (used == 0 && !w.memoryUnknown) {
+                w.memoryUnknown = true;
+                log::infof("cannot read the memory use of worker %d (pid %lu, errno %d); its memory limit is not enforced", w.id, w.pid, errno);
+            }
+            if (used <= limit) continue;
             const std::string what = describe_work(w);
             kill_worker(w, "memory limit exceeded");
             fail_unit(w, EXIT_RENDER, what + ": the worker process exceeded the memory limit (" + std::to_string(cfg_.workerMemoryLimitMB) + " MB); worker terminated");

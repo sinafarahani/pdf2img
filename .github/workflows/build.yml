@@ -30,6 +30,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: MSVC environment (Windows)
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      # After the MSVC step: its environment points VCPKG_ROOT at the vcpkg bundled with Visual Studio.
       - name: Paths
         shell: bash
         run: |
@@ -42,13 +49,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ninja-build nasm pkg-config python3-pip curl zip unzip tar
-          # vcpkg has no prebuilt tools for arm64 Linux: use the system's.
-          if [ "$(uname -m)" = "aarch64" ]; then echo "VCPKG_FORCE_SYSTEM_BINARIES=1" >> "$GITHUB_ENV"; fi
-          # CMake presets need CMake 3.25+.
-          v=$(cmake --version 2>/dev/null | head -1 | awk '{print $3}')
-          if [ -z "$v" ] || [ "$(printf '%s\n' 3.25 "$v" | sort -V | head -1)" != "3.25" ]; then
+          # vcpkg has no prebuilt tools for arm64 Linux: it then uses the system's, and its scripts need a current
+          # CMake (4.x), newer than the one on the runner image.
+          if [ "$(uname -m)" = "aarch64" ]; then
+            echo "VCPKG_FORCE_SYSTEM_BINARIES=1" >> "$GITHUB_ENV"
             python3 -m pip install --user --upgrade cmake
             echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+            "$HOME/.local/bin/cmake" --version | head -1
           fi
           if ! command -v pwsh >/dev/null; then
             arch=x64; [ "$(uname -m)" = "aarch64" ] && arch=arm64
@@ -62,12 +69,6 @@ jobs:
       - name: Build tools (macOS)
         if: runner.os == 'macOS'
         run: brew install ninja nasm pkg-config
-
-      - name: MSVC environment (Windows)
-        if: runner.os == 'Windows'
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x64
 
       - name: vcpkg binary cache
         uses: actions/cache@v4

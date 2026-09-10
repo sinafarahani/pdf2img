@@ -300,8 +300,12 @@ std::string ChildProcess::exit_description() {
 uint64_t ChildProcess::resident_bytes() const {
     if (pid_ == 0 || exited_) return 0;
 #if defined(__APPLE__)
+    // Physical footprint (what Activity Monitor calls "Memory"), else the resident size.
+    rusage_info_v2 ri{};
+    if (proc_pid_rusage(static_cast<int>(pid_), RUSAGE_INFO_V2, reinterpret_cast<rusage_info_t*>(&ri)) == 0)
+        return ri.ri_phys_footprint > ri.ri_resident_size ? ri.ri_phys_footprint : ri.ri_resident_size;
     proc_taskinfo ti{};
-    if (proc_pidinfo(static_cast<int>(pid_), PROC_PIDTASKINFO, 0, &ti, sizeof ti) != static_cast<int>(sizeof ti)) return 0;
+    if (proc_pidinfo(static_cast<int>(pid_), PROC_PIDTASKINFO, 0, &ti, sizeof ti) <= 0) return 0;
     return ti.pti_resident_size;
 #else
     char path[64];
